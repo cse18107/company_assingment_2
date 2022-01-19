@@ -1,0 +1,27 @@
+.home_body{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.home_container{
+    width: 90%;
+
+}
+.home_content{
+    display: grid;
+    grid-template-columns: repeat(5,20.76%);
+    /* grid-row-gap: 2%; */
+   
+    padding: 4px;
+}
+@media only screen and (max-width:1700px){
+    .home_content{
+        grid-template-columns: repeat(4,27.1%);
+    }
+}
+@media only screen and (max-width:1500px){
+    .home_content{
+        grid-template-columns: repeat(3,38.6%);
+    }
+}
