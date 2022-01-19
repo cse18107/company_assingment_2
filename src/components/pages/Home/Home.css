@@ -6,14 +6,15 @@
 }
 .home_container{
     width: 90%;
-
+    margin-top: 50px;
 }
 .home_content{
     display: grid;
     grid-template-columns: repeat(5,20.76%);
-    /* grid-row-gap: 2%; */
+
    
     padding: 4px;
+  color: rgb(134, 255, 255);
 }
 @media only screen and (max-width:1700px){
     .home_content{

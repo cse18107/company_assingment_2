@@ -27,9 +27,7 @@ const Home = () => {
         <div className="home_content">
           {shows.map((show) => {
             return (
-
                 <CardModel show={show.show}/>
-
             );
           })}
         </div>
