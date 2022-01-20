@@ -26,3 +26,23 @@
         grid-template-columns: repeat(3,38.6%);
     }
 }
+@media only screen and (max-width:1400px){
+    .home_content{
+        grid-template-columns: repeat(3,35.6%);
+    }
+}
+@media only screen and (max-width:990px){
+    .home_content{
+        grid-template-columns: repeat(2,56.6%);
+    }
+}
+@media only screen and (max-width:720px){
+    .home_content{
+        grid-template-columns: repeat(2,54.6%);
+    }
+}
+@media only screen and (max-width:650px){
+    .home_content{
+        grid-template-columns: repeat(1,100.6%);
+    }
+}
