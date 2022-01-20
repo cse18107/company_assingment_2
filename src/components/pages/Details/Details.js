@@ -1,94 +1,92 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { useParams } from "react-router-dom";
 import "./Details.css";
 
 function Details() {
-  const [show, setShow] = useState({});
-  const [img, setImg] = useState("");
-  const [avg, setAvg] = useState("");
-  const [time,setTime] = useState("");
-  const [summary,setSummary]= useState();
+  const child = useRef(null);
+  const [Show, setShow] = useState({});
   const params = useParams();
-  //console.log(params.id);
+
 
   
-    var stringToHTML = function (str) {
+    var stringToHTML =  (str)=> {
         var dom = document.createElement('div');
         dom.innerHTML = str;
         console.log(dom);
+        child.current=dom!=null?dom:<p></p>;
+        console.log(child.current.innerText)
         return (dom);
     };
   
 
-  useCallback(() => {
+  useEffect(() => {
     console.log("calling getShows()");
     const filterShow = (id) => {
-      //console.log(id.show.id==params.id);
+
       return id.show.id == params.id;
     };
     const getShows = async () => {
-    //   console.log("get");
       try {
         const res = await fetch("https://api.tvmaze.com/search/shows?q=all");
         const data = await res.json();
-        const getShow = data.filter(filterShow);
-        console.log(getShow[0]);
+         console.log(data);
+         let getShow = [];
+        getShow = data.filter(filterShow);
+        console.log(getShow);
         setShow(getShow[0]);
-        // setImg(getShow[0].show.image.original);
-        //   setAvg(getShow[0].show.rating.average);
-        //  //setTime(show);
-        // setSummary(getShow[0].show.summary);
-        // console.log(show.rating);
       } catch (err) {
         console.log(err);
       }
     };
     getShows();
-  }, [params.id]);
+  }, []);
 
-  //console.log(show.image);
-  console.log(show);
+
+
+  if(Object.keys(Show).length>0){
+     stringToHTML(Show.show.summary);
+  }
 
   return (
-    <div className="detail_page_body">
-      <div className="detail_page_container">
-        {show && <div className="detail_page_content">
+     <div className="detail_page_body">
+      {Object.keys(Show).length>0 && <div className="detail_page_container">
+         <div className="detail_page_content">
           <div className="detail_page_left">
             <div className="detail_page_image">
               <div className="detail_page_image_content">
-                <img className="detail_page_logo" src={show.image} alt="show" />
+                <img className="detail_page_logo" src={Show.show.image.original} alt="show" />
               </div>
             </div>
           </div>
           <div className="detail_page_right">
             <div className="detail_page_right_content">
               <div className="details detail_name">
-                <div className="label">Name</div>
-                <div className="detail">{show.name}</div>
+                <div className="label"><h4>Name</h4></div>
+                <div className="detail">{Show.show.name}</div>
               </div>
               <div className="details detail_language">
-                <div className="label">Language</div>
-                <div className="detail">{show.language}</div>
+                <div className="label"><h4>Language</h4></div>
+                <div className="detail">{Show.show.language}</div>
               </div>
               <div className="details detail_summary">
-                <div className="label">Description</div>
-                {/* <div className="detail">{stringToHTML(show.summary)}</div> */}
+                <div className="label"><h4>Description</h4></div>
+                <div className="detail"><p ref={child}>{child.current.innerText}</p></div>
               </div>
               <div className="details detail_schedule">
-                <div className="label">Time</div>
-                <div className="detail">{time}</div>
+                <div className="label"><h4>Time</h4></div>
+                <div className="detail">{Show.show.schedule.time || "00:00"}</div>
               </div>
               <div className="details detail_ratting">
-                <div className="label">Rating</div>
-                <div className="detail">{avg}</div>
+                <div className="label"><h4>Rating</h4></div>
+                <div className="detail">{Show.show.rating.average || "0"}</div>
               </div>
               <div>
                 <button>Book ticket</button>
               </div>
             </div>
           </div>
-        </div>}
-      </div>
+        </div>
+      </div>}
     </div>
   );
 }

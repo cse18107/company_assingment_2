@@ -10,7 +10,7 @@ const Home = () => {
     try {
       const res = await fetch("https://api.tvmaze.com/search/shows?q=all");
       const data = await res.json();
-      console.log(data[0].show.id);
+      // console.log(data[0].show.id);
       setShows(data);
     } catch (err) {
       console.log(err);
