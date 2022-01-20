@@ -66,7 +66,7 @@ function Details() {
   };
 
   const Model = (
-    <div className="model" onClick={() => setModel(!model)}>
+    <div className="model">
       {Object.keys(Show).length > 0 && (
         <div className="model_container">
           <div className="model_content">
