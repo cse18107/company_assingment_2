@@ -18,13 +18,25 @@ const CardModel = (props) =>{
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {props.show.name}
+                Name: {props.show.name}
               </Typography>
-
+              <Typography gutterBottom variant="h5" component="div">
+                Language:  {props.show.language}
+              </Typography>
+              <Typography gutterBottom variant="h5" component="div">
+                Rating:  {props.show.rating.average}
+              </Typography>
             </CardContent>
           </CardActionArea>
           <CardActions>
-            <Link to={`/${props.show.id}`}>
+            <Link to={`/${props.show.id}`} style={{
+              textDecoration:"none",
+              fontSize:"1.1rem",
+              padding:"4px",
+              backgroundColor:"rgba(4, 179, 4, 0.637)",
+              color:"white",
+              borderRadius:"3px"
+            }}>
               Details
             </Link>
           </CardActions>
